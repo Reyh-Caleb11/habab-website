@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Calcio</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav>
+  
+      <li><a href="index.html">Home</a></li>
+      <li><a href="curriculum.html">Curriculum</a></li>
+      <li><a href="progetti.html">Progetti</a></li>
+  
+  </nav>
+  <main>
+    <h1>Quiz sul Calcio</h1>
+    <div id="quiz-container">
+      <p id="question"></p>
+      <div id="answers"></div>
+      <p id="feedback"></p>
+      <button id="next-btn" onclick="nextQuestion()" style="display:none">Continua</button>
+    </div>
+  </main>
+  <script>
+    const quiz = [
+      {
+        question: "Chi ha vinto il Mondiale 2006?",
+        answers: ["Italia", "Francia", "Germania", "Brasile"],
+        correct: 0
+      },
+      {
+        question: "Chi ha segnato il gol decisivo nella finale di Champions 2014?",
+        answers: ["Sergio Ramos", "Cristiano Ronaldo", "Bale", "Di Maria"],
+        correct: 0
+      },
+      {
+        question: "Quanti gol ha segnato Miroslav Klose nei Mondiali?",
+        answers: ["16", "14", "18", "12"],
+        correct: 0
+      },
+      {
+        question: "Chi ha segnato il golden goal nella semifinale di Euro 2000 contro l'Olanda?",
+        answers: ["Del Piero", "Totti", "Trezeguet", "Wiltord"],
+        correct: 2
+      },
+      {
+        question: "Qual è il club con più Champions League?",
+        answers: ["Milan", "Barcellona", "Real Madrid", "Liverpool"],
+        correct: 2
+      },
+      {
+        question: "Chi ha fatto il famoso cucchiaio contro l'Inghilterra a Euro 2012?",
+        answers: ["Pirlo", "Balotelli", "De Rossi", "Totti"],
+        correct: 0
+      },
+  {
+        question: "Qual è la squadra più forte d'Italia?",
+        answers: ["Juventus", "Milan", "Inter", "Napoli"],
+        correct: 0
+      },
+      {
+        question: "Qual è stato il primo giocatore a segnare in 5 edizioni diverse dei Mondiali?",
+        answers: ["Pelè", "Ronaldo Nazàrio", "Messi", "Cristiano Ronaldo"],
+        correct: 3
+      },
+      {
+        question: "Chi ha vinto la Coppa Intercontinentale con due squadre diverse?",
+        answers: ["Clarence Seedorf", "Juan Sebastián Verón", "Cafu", "Dida"],
+        correct: 1
+      },
+      {
+        question: "Qual è l’unico club ad aver vinto la Champions League senza mai perdere una partita nella stagione completa (coppe + campionato)?",
+        answers: ["Ajax 1994-95", "Milan 1993-94", "Barcellona 2008-09", "Manchester United 1998-99"],
+        correct: 0
+      },
+      {
+        question: "Chi è il difensore con più gol segnati nella storia del calcio professionistico?",
+        answers: ["Ronald Koeman", "Sergio Ramos", "Fernando Hierro", "Daniel Passarella"],
+        correct: 0
+      },
+      {
+        question: "Chi è il calciatore con più presenze nella storia della Nazionale italiana (al 2024)?",
+        answers: ["Gianluigi Buffon", "Daniele De Rossi", "Fabio Cannavaro", "Leonardo Bonucci"],
+        correct: 0
+      },
+      {
+        question: "In quale stagione una squadra ha segnato 106 gol in Premier League, stabilendo il record?",
+        answers: ["Manchester City 2017-18", "Liverpool 2019-20", "Chelsea 2009-10", "Arsenal 2003-04"],
+        correct: 2
+      },
+      {
+        question: "Chi è il primo portiere ad aver vinto il premio Yashin (miglior portiere del mondo)?",
+        answers: ["Alisson Becker", "Thibaut Courtois", "Emiliano Martínez", "Gianluigi Donnarumma"],
+        correct: 3
+      }
+    ];
+
+    let current = 0;
+
+    function loadQuestion() {
+      const q = quiz[current];
+      document.getElementById("question").textContent = q.question;
+      const answersDiv = document.getElementById("answers");
+      answersDiv.innerHTML = "";
+      document.getElementById("feedback").textContent = "";
+      document.getElementById("next-btn").style.display = "none";
+
+      q.answers.forEach((ans, i) => {
+        const btn = document.createElement("button");
+        btn.textContent = ans;
+        btn.onclick = () => checkAnswer(i);
+        answersDiv.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(index) {
+      const q = quiz[current];
+      const feedback = document.getElementById("feedback");
+      if (index === q.correct) {
+        feedback.textContent = "Good boy";
+      } else {
+        feedback.textContent = "Mi dispiace bro, hai sbagliato!";
+      }
+      document.querySelectorAll("#answers button").forEach(btn => btn.disabled = true);
+      document.getElementById("next-btn").style.display = "inline-block";
+    }
+
+    function nextQuestion() {
+      current++;
+      if (current < quiz.length) {
+        loadQuestion();
+      } else {
+        document.getElementById("quiz-container").innerHTML = "<h2>Quiz finito</h2>";
+      }
+    }
+
+    loadQuestion();
+  </script>
+  
+</body>
+</html>
+
