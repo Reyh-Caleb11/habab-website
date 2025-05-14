@@ -1,2 +1,2 @@
 # habab-website
-# Buongiorno, questo è il mio sito web realizzato utilizzando html, css e javascript p5
+# Buongiorno, questo è il mio sito web realizzato utilizzando html e css
